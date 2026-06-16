@@ -395,6 +395,7 @@ subset_size = 42
 for i in range(4):
 
     subset_folder = "output/subset" + str(i + 1)
+    os.makedirs(subset_folder, exist_ok=True)
 
     start = i * subset_size
     end = start + subset_size
@@ -463,3 +464,141 @@ for file in os.listdir(subset_folder):
     )
 
 print("Sobel images saved.")
+
+# Laplacian Edge Detection
+
+import os
+
+os.makedirs("output/laplacian", exist_ok=True)
+
+for file in os.listdir("output/subset1"):
+
+    image_path = os.path.join(
+        "output/subset1",
+        file
+    )
+
+    img = cv2.imread(
+        image_path,
+        cv2.IMREAD_GRAYSCALE
+    )
+
+    if img is None:
+        continue
+
+    laplacian = cv2.Laplacian(
+        img,
+        cv2.CV_64F
+    )
+
+    save_name = os.path.join(
+        "output/laplacian",
+        "laplacian_" + file
+    )
+
+    cv2.imwrite(
+        save_name,
+        laplacian
+    )
+
+print("Laplacian images saved.")
+
+# Canny Edge Detection
+
+os.makedirs("output/canny", exist_ok=True)
+
+for file in os.listdir("output/subset1"):
+
+    image_path = os.path.join(
+        "output/subset1",
+        file
+    )
+
+    img = cv2.imread(
+        image_path,
+        cv2.IMREAD_GRAYSCALE
+    )
+
+    if img is None:
+        continue
+
+    canny = cv2.Canny(
+        img,
+        100,
+        200
+    )
+
+    save_name = os.path.join(
+        "output/canny",
+        "canny_" + file
+    )
+
+    cv2.imwrite(
+        save_name,
+        canny
+    )
+
+print("Canny images saved.")
+
+# Prewitt Edge Detection
+
+os.makedirs("output/prewitt", exist_ok=True)
+
+for file in os.listdir("output/subset1"):
+
+    image_path = os.path.join(
+        "output/subset1",
+        file
+    )
+
+    img = cv2.imread(
+        image_path,
+        cv2.IMREAD_GRAYSCALE
+    )
+
+    if img is None:
+        continue
+
+    kernel_x = np.array([
+        [-1, 0, 1],
+        [-1, 0, 1],
+        [-1, 0, 1]
+    ])
+
+    kernel_y = np.array([
+        [1, 1, 1],
+        [0, 0, 0],
+        [-1, -1, -1]
+    ])
+
+    prewitt_x = cv2.filter2D(
+        img,
+        -1,
+        kernel_x
+    )
+
+    prewitt_y = cv2.filter2D(
+        img,
+        -1,
+        kernel_y
+    )
+
+    prewitt = cv2.addWeighted(
+        prewitt_x,
+        0.5,
+        prewitt_y,
+        0.5,
+        0
+    )
+
+    save_name = os.path.join(
+        "output/prewitt",
+        "prewitt_" + file
+    )
+
+    cv2.imwrite(
+        save_name,
+        prewitt
+    )
+
+print("Prewitt images saved.")
