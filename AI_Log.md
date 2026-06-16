@@ -2,31 +2,23 @@
 
 ## Entry 1
 
-Date: 06/15/2026
-
-Tool Used: ChatGPT
-
 Prompt:
-Asked for guidance on setting up the project repository and project structure.
+Asked for help setting up the Git repository and connecting it to GitHub.
 
 Result:
-Received general setup guidance.
+Received guidance on creating the repository, committing files, and pushing the project to GitHub.
 
 Changes Made:
-Created and organized the project repository.
+Created the project repository and uploaded the initial project files.
 
 ## Entry 2
 
-Date: 06/15/2026
-
-Tool Used: ChatGPT
-
 Prompt:
-Asked for guidance on OpenCV image loading and image format conversions.
+Asked for help loading the image and generating the required image statistics and color space conversions.
 
 Result:
-Received examples of image processing operations in OpenCV.
+Received guidance on reading the image with OpenCV, calculating channel statistics, and creating grayscale, binary, HSV, LAB, HLS, and normalized HSV outputs.
 
 Changes Made:
-Implemented image loading, basic image statistics, and image conversions required for the assignment.
+Added image analysis code and generated the required converted images.
 
