@@ -188,3 +188,145 @@ for sigma in sigmas:
     )
 
 print("Grayscale blur images saved.")
+
+# Gaussian Blur on Binary Image
+
+for sigma in sigmas:
+
+    blurred = cv2.GaussianBlur(
+        binary,
+        (0, 0),
+        sigma
+    )
+
+    filename = (
+        "output/blur/binary_sigma_"
+        + str(sigma)
+        + ".png"
+    )
+
+    cv2.imwrite(
+        filename,
+        blurred
+    )
+
+print("Binary blur images saved.")
+
+
+# Gaussian Blur on HSV Image
+
+for sigma in sigmas:
+
+    blurred = cv2.GaussianBlur(
+        hsv,
+        (0, 0),
+        sigma
+    )
+
+    filename = (
+        "output/blur/hsv_sigma_"
+        + str(sigma)
+        + ".png"
+    )
+
+    cv2.imwrite(
+        filename,
+        blurred
+    )
+
+print("HSV blur images saved.")
+
+# Gaussian Blur on HSV Normalized Image
+
+for sigma in sigmas:
+
+    blurred = cv2.GaussianBlur(
+        hsv_norm,
+        (0, 0),
+        sigma
+    )
+
+    filename = (
+        "output/blur/hsv_normalized_sigma_"
+        + str(sigma)
+        + ".png"
+    )
+
+    cv2.imwrite(
+        filename,
+        blurred
+    )
+
+print("HSV Normalized blur images saved.")
+
+
+# Gaussian Blur on RGB Normalized Image
+
+for sigma in sigmas:
+
+    blurred = cv2.GaussianBlur(
+        rgb_normalized,
+        (0, 0),
+        sigma
+    )
+
+    filename = (
+        "output/blur/rgb_normalized_sigma_"
+        + str(sigma)
+        + ".png"
+    )
+
+    cv2.imwrite(
+        filename,
+        blurred
+    )
+
+print("RGB Normalized blur images saved.")
+
+
+# Gaussian Blur on LAB Image
+
+for sigma in sigmas:
+
+    blurred = cv2.GaussianBlur(
+        lab,
+        (0, 0),
+        sigma
+    )
+
+    filename = (
+        "output/blur/lab_sigma_"
+        + str(sigma)
+        + ".png"
+    )
+
+    cv2.imwrite(
+        filename,
+        blurred
+    )
+
+print("LAB blur images saved.")
+
+
+# Gaussian Blur on HLS Image
+
+for sigma in sigmas:
+
+    blurred = cv2.GaussianBlur(
+        hls,
+        (0, 0),
+        sigma
+    )
+
+    filename = (
+        "output/blur/hls_sigma_"
+        + str(sigma)
+        + ".png"
+    )
+
+    cv2.imwrite(
+        filename,
+        blurred
+    )
+
+print("HLS blur images saved.")
