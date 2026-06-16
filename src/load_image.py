@@ -6,6 +6,7 @@ img = cv2.imread("data/HW1_IMG_CS898BA.png")
 
 if img is None:
     print("Image was not loaded")
+
 else:
     print("Image loaded")
 
@@ -52,13 +53,138 @@ else:
     # HLS
     hls = cv2.cvtColor(img, cv2.COLOR_BGR2HLS)
     cv2.imwrite("output/hls/hls.png", hls)
+
     # Normalized HSV
-hsv_norm = hsv.copy()
-hsv_norm[:, :, 2] = cv2.equalizeHist(hsv_norm[:, :, 2])
+    hsv_norm = hsv.copy()
+    hsv_norm[:, :, 2] = cv2.equalizeHist(hsv_norm[:, :, 2])
 
-cv2.imwrite("output/hsv/hsv_normalized.png", hsv_norm)
+    cv2.imwrite("output/hsv/hsv_normalized.png", hsv_norm)
 
-rgb_normalized = cv2.cvtColor(hsv_norm, cv2.COLOR_HSV2BGR)
-cv2.imwrite("output/hsv/rgb_normalized.png", rgb_normalized)
+    rgb_normalized = cv2.cvtColor(hsv_norm, cv2.COLOR_HSV2BGR)
+    cv2.imwrite("output/hsv/rgb_normalized.png", rgb_normalized)
 
-print("\nConverted images saved.")
+    print("\nConverted images saved.")
+    # Affine Transformation - Translation
+
+rows, cols = gray.shape
+
+translation_matrix = np.float32([
+    [1, 0, 50],
+    [0, 1, 30]
+])
+
+translated = cv2.warpAffine(
+    gray,
+    translation_matrix,
+    (cols, rows)
+)
+
+cv2.imwrite(
+    "output/affine/grayscale_translation.png",
+    translated
+)
+
+print("First affine image saved.")
+rotation_matrix = cv2.getRotationMatrix2D(
+    (cols / 2, rows / 2),
+    45,
+    1
+)
+
+rotated = cv2.warpAffine(
+    gray,
+    rotation_matrix,
+    (cols, rows)
+)
+
+cv2.imwrite(
+    "output/affine/grayscale_rotation.png",
+    rotated
+)
+
+print("Second affine image saved.")
+rotation_matrix = cv2.getRotationMatrix2D(
+    (cols / 2, rows / 2),
+    45,
+    1
+)
+
+rotated = cv2.warpAffine(
+    gray,
+    rotation_matrix,
+    (cols, rows)
+)
+
+cv2.imwrite(
+    "output/affine/grayscale_rotation.png",
+    rotated
+)
+
+print("Second affine image saved.")
+# Binary Transformations
+translated = cv2.warpAffine(binary, translation_matrix, (cols, rows))
+cv2.imwrite("output/affine/binary_translation.png", translated)
+
+rotated = cv2.warpAffine(binary, rotation_matrix, (cols, rows))
+cv2.imwrite("output/affine/binary_rotation.png", rotated)
+
+# HSV Transformations
+translated = cv2.warpAffine(hsv, translation_matrix, (cols, rows))
+cv2.imwrite("output/affine/hsv_translation.png", translated)
+
+rotated = cv2.warpAffine(hsv, rotation_matrix, (cols, rows))
+cv2.imwrite("output/affine/hsv_rotation.png", rotated)
+
+# HSV Normalized Transformations
+translated = cv2.warpAffine(hsv_norm, translation_matrix, (cols, rows))
+cv2.imwrite("output/affine/hsv_normalized_translation.png", translated)
+
+rotated = cv2.warpAffine(hsv_norm, rotation_matrix, (cols, rows))
+cv2.imwrite("output/affine/hsv_normalized_rotation.png", rotated)
+
+# RGB Normalized Transformations
+translated = cv2.warpAffine(rgb_normalized, translation_matrix, (cols, rows))
+cv2.imwrite("output/affine/rgb_normalized_translation.png", translated)
+
+rotated = cv2.warpAffine(rgb_normalized, rotation_matrix, (cols, rows))
+cv2.imwrite("output/affine/rgb_normalized_rotation.png", rotated)
+
+# LAB Transformations
+translated = cv2.warpAffine(lab, translation_matrix, (cols, rows))
+cv2.imwrite("output/affine/lab_translation.png", translated)
+
+rotated = cv2.warpAffine(lab, rotation_matrix, (cols, rows))
+cv2.imwrite("output/affine/lab_rotation.png", rotated)
+
+# HLS Transformations
+translated = cv2.warpAffine(hls, translation_matrix, (cols, rows))
+cv2.imwrite("output/affine/hls_translation.png", translated)
+
+rotated = cv2.warpAffine(hls, rotation_matrix, (cols, rows))
+cv2.imwrite("output/affine/hls_rotation.png", rotated)
+
+print("All affine transformations saved.")
+# Gaussian Blur on Grayscale Image
+
+sigmas = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+
+for sigma in sigmas:
+
+    blurred = cv2.GaussianBlur(
+        gray,
+        (0, 0),
+        sigma
+    )
+
+    filename = (
+        "output/blur/grayscale_sigma_"
+        + str(sigma)
+        + ".png"
+    )
+
+    cv2.imwrite(
+        filename,
+        blurred
+    )
+
+print("Grayscale blur images saved.")
