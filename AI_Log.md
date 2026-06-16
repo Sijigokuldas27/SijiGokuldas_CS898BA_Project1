@@ -4,7 +4,7 @@
 
 **AI Tool:** ChatGPT
 
-**Prompt:** Help with setting up the GitHub repository for the CS898BA image processing project.
+**Prompt:** How do I create a GitHub repository for my CS898BA Project 1 assignment, add my Python files, make commits, and push everything to GitHub correctly?.
 
 **Response Synopsis:** Received guidance on creating the repository, organizing project files, and pushing commits to GitHub.
 
@@ -16,7 +16,7 @@
 
 **AI Tool:** ChatGPT
 
-**Prompt:** Help with calculating image statistics and converting the original image into different color spaces.
+**Prompt:** How can I calculate image statistics such as minimum, maximum, average, median, mode, skew, range, standard deviation, and variance for each image channel, and convert the original image into grayscale, binary, HSV, LAB, and HLS color spaces using OpenCV?.
 
 **Response Synopsis:** Received guidance on calculating channel statistics and generating grayscale, binary, HSV, LAB, HLS, normalized HSV, and normalized RGB images using OpenCV.
 
@@ -28,7 +28,7 @@
 
 **AI Tool:** ChatGPT
 
-**Prompt:** Help with applying affine transformations to the generated images.
+**Prompt:** How can I apply unique affine transformations such as translation and rotation to each generated image, save the transformed images into separate output folders, and organize the files for the assignment requirements?.
 
 **Response Synopsis:** Received guidance on using translation and rotation transformations and saving the transformed images to the output folder.
 
@@ -40,7 +40,7 @@
 
 **AI Tool:** ChatGPT
 
-**Prompt:** Help with applying Gaussian blur to the generated images using different sigma values.
+**Prompt:** How can I apply Gaussian blur to all generated images using sigma values of 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, and 3.5, save the outputs, and explain how increasing sigma affects image quality and detail?.
 
 **Response Synopsis:** Received guidance on using Gaussian blur with multiple sigma levels and organizing the output images.
 
@@ -52,7 +52,7 @@
 
 **AI Tool:** ChatGPT
 
-**Prompt:** Help with creating image subsets, applying edge detection techniques, and organizing project outputs.
+**Prompt:** How can I randomly create four equal image subsets, select one subset for analysis, apply Sobel, Laplacian, Canny, and Prewitt edge detection methods, compare their results, and organize the generated output images for the final project?.
 
 **Response Synopsis:** Received guidance on creating image subsets and applying Sobel, Laplacian, Canny, and Prewitt edge detection methods for comparison.
 
