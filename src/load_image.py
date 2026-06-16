@@ -330,3 +330,136 @@ for sigma in sigmas:
     )
 
 print("HLS blur images saved.")
+import os
+
+sigmas = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+
+affine_folder = "output/affine"
+
+for image_name in os.listdir(affine_folder):
+
+    image_path = os.path.join(affine_folder, image_name)
+
+    image = cv2.imread(image_path)
+
+    if image is None:
+        continue
+
+    base_name = image_name.replace(".png", "")
+
+    for sigma in sigmas:
+
+        blurred = cv2.GaussianBlur(
+            image,
+            (0, 0),
+            sigma
+        )
+
+        save_name = (
+            "output/blur/"
+            + base_name
+            + "_sigma_"
+            + str(sigma)
+            + ".png"
+        )
+
+        cv2.imwrite(
+            save_name,
+            blurred
+        )
+
+print("Affine blur images saved.")
+
+import os
+import random
+import shutil
+
+all_images = []
+
+for folder in ["affine", "blur"]:
+
+    folder_path = "output/" + folder
+
+    for file in os.listdir(folder_path):
+
+        if file.endswith(".png"):
+
+            all_images.append(
+                os.path.join(folder_path, file)
+            )
+
+random.shuffle(all_images)
+
+subset_size = 42
+
+for i in range(4):
+
+    subset_folder = "output/subset" + str(i + 1)
+
+    start = i * subset_size
+    end = start + subset_size
+
+    subset_images = all_images[start:end]
+
+    for image_file in subset_images:
+
+        shutil.copy(
+            image_file,
+            subset_folder
+        )
+
+print("Subsets created.")
+
+# Sobel Edge Detection
+
+import os
+
+subset_folder = "output/subset1"
+
+for file in os.listdir(subset_folder):
+
+    image_path = os.path.join(
+        subset_folder,
+        file
+    )
+
+    image = cv2.imread(
+        image_path,
+        cv2.IMREAD_GRAYSCALE
+    )
+
+    if image is None:
+        continue
+
+    sobel_x = cv2.Sobel(
+        image,
+        cv2.CV_64F,
+        1,
+        0,
+        ksize=3
+    )
+
+    sobel_y = cv2.Sobel(
+        image,
+        cv2.CV_64F,
+        0,
+        1,
+        ksize=3
+    )
+
+    sobel = cv2.magnitude(
+        sobel_x,
+        sobel_y
+    )
+
+    save_name = os.path.join(
+        "output/sobel",
+        "sobel_" + file
+    )
+
+    cv2.imwrite(
+        save_name,
+        sobel
+    )
+
+print("Sobel images saved.")
