@@ -71,3 +71,42 @@ Based on visual comparison of the generated outputs, Sobel provided the most use
 ## Conclusion
 
 This project demonstrated image analysis and image processing techniques using Python and OpenCV. The assignment included image statistics, color space conversion, histogram equalization, affine transformations, Gaussian blurring, image subset creation, and edge detection. The generated outputs showed how different techniques affect image quality and feature extraction. Overall, Sobel produced the most effective edge detection results for the selected image subset.
+
+
+# Homework 2 - Image Segmentation
+
+## Segmentation Methods
+
+The following segmentation methods were implemented:
+
+ Otsu Thresholding
+ Adaptive Thresholding
+ K-Means Clustering
+
+## Comparison of Results
+
+![Comparison Plot](output/comparison_plot.png)
+
+## Analysis
+
+The original image was first normalized to improve the color balance before applying different segmentation methods.
+
+ Otsu Thresholding separated the foreground from the background, but some background regions were also included because of the uneven lighting.
+ Adaptive Thresholding handled the lighting variation better, but it also introduced more noise in the background.
+ K-Means Clustering grouped pixels based on color similarity. It preserved more color information, although some background objects were still grouped with the person.
+
+Based on the visual comparison, Adaptive Thresholding provided the clearest separation of the person, while K-Means preserved more image details.
+
+## Evaluation Metrics
+
+The segmentation methods were compared using Intersection over Union (IoU) and Dice Coefficient with a manually created reference mask.
+
+| Method | IoU | Dice |
+|--------|------:|------:|
+| Otsu | 0.0292 | 0.000222 |
+| Adaptive | 0.0621 | 0.000458 |
+| K-Means | 0.0376 | 0.000284 |
+
+## Conclusion
+
+This assignment explored different image segmentation techniques and compared their performance using both visual inspection and evaluation metrics. The comparison figure helped visualize the strengths and weaknesses of each method. Among the three methods, Adaptive Thresholding gave the best overall separation of the person in this image, while K-Means preserved more color information.
