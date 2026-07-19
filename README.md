@@ -87,6 +87,24 @@ The following segmentation methods were implemented:
 
 ![Comparison Plot](output/comparison_plot.png)
 
+## Segmentation Masks
+
+**Ground Truth**
+
+![Ground Truth Mask](output/ground_truth/ground_truth_mask.png)
+
+**Otsu Thresholding**
+
+![Otsu Mask](output/segmentation_output/otsu_binary_mask.png)
+
+**Adaptive Thresholding**
+
+![Adaptive Mask](output/segmentation_output/adaptive_binary_mask.png)
+
+**K-Means Clustering**
+
+![K-Means Mask](output/segmentation_output/kmeans_k5.png)
+
 ## Analysis
 
 The original image was first normalized to improve the color balance before applying different segmentation methods.
@@ -94,8 +112,12 @@ The original image was first normalized to improve the color balance before appl
  Otsu Thresholding separated the foreground from the background, but some background regions were also included because of the uneven lighting.
  Adaptive Thresholding handled the lighting variation better, but it also introduced more noise in the background.
  K-Means Clustering grouped pixels based on color similarity. It preserved more color information, although some background objects were still grouped with the person.
+ For K-Means, K = 5 was selected, meaning the image was grouped into 5 color clusters. This value was chosen to balance detail and simplicity — a lower K (like 2 or 3) risked merging the person with the background, while a higher K would have created too many small, fragmented regions instead of one clear foreground group.
 
 Based on the visual comparison, Adaptive Thresholding provided the clearest separation of the person, while K-Means preserved more image details.
+It is also worth noting that the original image was captured in low-light/dusk conditions. This darkness likely contributed to the relatively low IoU and Dice scores across all three methods, since low contrast between the person and the background makes it harder for any thresholding or clustering method to draw a precise boundary.
+
+During evaluation, it was also discovered that some of the raw segmentation masks had inverted pixel values (foreground and background reversed) compared to the ground truth mask. This was corrected by adding an automatic inversion check: each mask is compared against the ground truth in both its original and inverted form, and whichever version produces a higher IoU is used for the final metric calculation. This ensures the scores reflect true segmentation accuracy rather than a labeling mismatch.
 
 ## Evaluation Metrics
 
@@ -103,10 +125,47 @@ The segmentation methods were compared using Intersection over Union (IoU) and D
 
 | Method | IoU | Dice |
 |--------|------:|------:|
-| Otsu | 0.0292 | 0.000222 |
-| Adaptive | 0.0621 | 0.000458 |
-| K-Means | 0.0376 | 0.000284 |
+| Otsu | 0.1006 | 0.1829 |
+| Adaptive | 0.0658 | 0.1235 |
+| K-Means | 0.0896 | 0.1644 |
 
 ## Conclusion
 
 This assignment explored different image segmentation techniques and compared their performance using both visual inspection and evaluation metrics. The comparison figure helped visualize the strengths and weaknesses of each method. Among the three methods, Adaptive Thresholding gave the best overall separation of the person in this image, while K-Means preserved more color information.
+
+## Directory Structure
+
+```
+SijiGokuldas_CS898BA_Project1/
+├── data/
+│   └── HW1_IMG_CS898BA.png
+├── output/
+│   ├── affine/
+│   ├── binary/
+│   ├── blur/
+│   ├── canny/
+│   ├── grayscale/
+│   ├── ground_truth/
+│   ├── hls/
+│   ├── hls.png
+│   ├── hsv/
+│   ├── lab/
+│   ├── laplacian/
+│   ├── prewitt/
+│   ├── segmentation_output/
+│   ├── subset1/
+│   ├── subset2/
+│   ├── subset3/
+│   ├── subset4/
+│   └── comparison_plot.png
+├── src/
+│   ├── segmentation/
+│   │   ├── comparison_plot.py
+│   │   ├── evaluation.py
+│   │   └── main_segmentation.py
+│   └── load_image.py
+├── AI_Log.md
+├── hello.py
+├── README.md
+└── requirements.txt
+```

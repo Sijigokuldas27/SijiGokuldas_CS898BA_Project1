@@ -82,14 +82,39 @@ print("Binary images created.")
 # Function to calculate IoU
 def calculate_iou(mask1, mask2):
 
-    intersection = np.logical_and(mask1, mask2)
-    union = np.logical_or(mask1, mask2)
+    mask1_bool = mask1 > 0
+    mask2_bool = mask2 > 0
+
+    intersection = np.logical_and(mask1_bool, mask2_bool)
+    union = np.logical_or(mask1_bool, mask2_bool)
 
     iou = np.sum(intersection) / np.sum(union)
 
     return iou
 
 print("IoU function created.")
+
+# Function to fix masks that may be inverted (black/white swapped)
+def fix_if_inverted(mask, reference):
+
+    iou_normal = calculate_iou(reference, mask)
+
+    inverted_mask = cv2.bitwise_not(mask)
+    iou_inverted = calculate_iou(reference, inverted_mask)
+
+    if iou_inverted > iou_normal:
+        print("Mask was inverted. Flipping black/white to correct it.")
+        return inverted_mask
+    else:
+        return mask
+
+print("Inversion-check function created.")
+
+# Check and fix each mask against the ground truth
+otsu = fix_if_inverted(otsu, ground_truth)
+adaptive = fix_if_inverted(adaptive, ground_truth)
+kmeans = fix_if_inverted(kmeans, ground_truth)
+
 # Calculate IoU values
 
 otsu_iou = calculate_iou(
@@ -113,10 +138,13 @@ print("K-Means IoU:", kmeans_iou)
 # Function to calculate Dice Coefficient
 def calculate_dice(mask1, mask2):
 
-    intersection = np.logical_and(mask1, mask2)
+    mask1_bool = mask1 > 0
+    mask2_bool = mask2 > 0
+
+    intersection = np.logical_and(mask1_bool, mask2_bool)
 
     dice = (2 * np.sum(intersection)) / (
-        np.sum(mask1) + np.sum(mask2)
+        np.sum(mask1_bool) + np.sum(mask2_bool)
     )
 
     return dice
