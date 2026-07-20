@@ -179,6 +179,7 @@ The "A Large Scale Fish Dataset" from Kaggle was used, containing 9 fish species
 ## Data Preprocessing and Augmentation
 
 All images were resized to 128x128 pixels and normalized to a [-1, 1] pixel range. Data augmentation (random horizontal flips, random rotation up to 10 degrees, and brightness jitter) was applied only to the training set to improve generalization and reduce overfitting. No augmentation was applied to validation/test data, since those sets are meant to reflect real, unmodified performance.
+This augmentation had a visible effect on training stability: in both the baseline and optimized training curves, validation accuracy remained consistently higher than training accuracy throughout training, and validation loss stayed below training loss. This is a strong indicator that the model was not overfitting — augmentation made the training data intentionally harder and more varied, which meant the model had to learn genuinely transferable features rather than memorizing exact images, resulting in better performance on unseen validation data.
 
 ## Baseline CNN
 
