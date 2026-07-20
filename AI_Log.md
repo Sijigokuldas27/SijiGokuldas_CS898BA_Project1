@@ -58,3 +58,27 @@
 
 **Changes Made:** Created image subsets, generated edge detection outputs, and completed the final image processing workflow.
 
+## Entry 6
+
+**Date and Time:** July 19, 2026, 11:00 AM
+
+**AI Tool:** Claude
+
+**Prompt:** Help downloading and organizing the fish dataset into train/val/test folders.
+
+**Response Synopsis:** Guidance on dataset download and folder organization.
+
+**Changes Made:** Created download_fish_data.py and preprocessing.py.
+
+## Entry 7
+
+**Date and Time:** July 19, 2026, 1:00 PM
+
+**AI Tool:** Claude
+
+**Prompt:** Help building and training a baseline CNN on the fish dataset.
+
+**Response Synopsis:** Guidance on CNN architecture and training loop.
+
+**Changes Made:** Created train_baseline.py.
+
