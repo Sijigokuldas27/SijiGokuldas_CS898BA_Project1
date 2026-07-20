@@ -188,7 +188,7 @@ A CNN with 3 convolutional layers (32, 64, 128 filters), ReLU activation, and ma
 
 ## Hyperparameter Tuning
 
-Six configurations were tested, varying learning rate (0.01, 0.001, 0.0001), batch size (32, 64), and dropout rate (0.3, 0.5). Each configuration was trained for 3 epochs and compared by validation loss.
+A Grid Search strategy was used, systematically testing six configurations by varying learning rate (0.01, 0.001, 0.0001), batch size (32, 64), and dropout rate (0.3, 0.5). Each configuration was trained for 3 epochs and compared by validation loss.
 
 | Learning Rate | Batch Size | Dropout | Val Loss | Val Accuracy |
 |---|---|---|---|---|
@@ -223,7 +223,7 @@ Using the best configuration identified through tuning, a final model was traine
 
 ## Test Set Evaluation
 
-Both models were evaluated on the held-out test set (540 images, unseen during training or validation). The optimized model achieved 92.68% overall test accuracy, with per-class F1-scores ranging from 0.876 (Sea Bass) to 0.968 (Red Mullet). Full precision, recall, and F1-score tables for both models are available in `output/classification_reports.txt`.
+Both models were evaluated on the held-out test set (540 images, unseen during training or validation). The baseline model achieved 89.44% test accuracy, while the optimized model achieved 92.59% test accuracy — confirming the improvement from tuning and longer training held up on genuinely unseen data, not just validation data. The optimized model's per-class F1-scores ranged from 0.876 (Sea Bass) to 0.968 (Red Mullet). Full precision, recall, and F1-score tables for both models are available in `output/classification_reports.txt`.
 
 ## Confusion Matrix Analysis
 
