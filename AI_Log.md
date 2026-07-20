@@ -82,3 +82,26 @@
 
 **Changes Made:** Created train_baseline.py.
 
+## Entry 8
+
+**Date and Time:** July 19, 2026, 3:00 PM
+
+**AI Tool:** Claude
+
+**Prompt:** Help with hyperparameter tuning and training the optimized model.
+
+**Response Synopsis:** Guidance on testing configurations and training the final model.
+
+**Changes Made:** Created hyperparameter_tuning.py and train_optimized.py.
+
+## Entry 9
+
+**Date and Time:** July 19, 2026, 4:00 PM
+
+**AI Tool:** Claude
+
+**Prompt:** Help evaluating models with classification reports and confusion matrix.
+
+**Response Synopsis:** Guidance on generating evaluation metrics and visualizations.
+
+**Changes Made:** Created evaluate_models.py and updated README.md.

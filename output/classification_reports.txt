@@ -1,0 +1,36 @@
+BASELINE MODEL - Test Set Classification Report
+============================================================
+                    precision    recall  f1-score   support
+
+   Black Sea Sprat     0.8108    1.0000    0.8955        60
+   Gilt-Head Bream     0.8833    0.8833    0.8833        60
+   Hourse Mackerel     0.9800    0.8167    0.8909        60
+        Red Mullet     0.9524    1.0000    0.9756        60
+     Red Sea Bream     0.7838    0.9667    0.8657        60
+          Sea Bass     0.9057    0.8000    0.8496        60
+            Shrimp     0.8824    1.0000    0.9375        60
+Striped Red Mullet     0.9592    0.7833    0.8624        60
+             Trout     0.9796    0.8000    0.8807        60
+
+          accuracy                         0.8944       540
+         macro avg     0.9041    0.8944    0.8935       540
+      weighted avg     0.9041    0.8944    0.8935       540
+
+
+OPTIMIZED MODEL - Test Set Classification Report
+============================================================
+                    precision    recall  f1-score   support
+
+   Black Sea Sprat     0.9655    0.9333    0.9492        60
+   Gilt-Head Bream     0.9649    0.9167    0.9402        60
+   Hourse Mackerel     0.9310    0.9000    0.9153        60
+        Red Mullet     0.9375    1.0000    0.9677        60
+     Red Sea Bream     0.8871    0.9167    0.9016        60
+          Sea Bass     0.8689    0.8833    0.8760        60
+            Shrimp     0.9508    0.9667    0.9587        60
+Striped Red Mullet     0.9464    0.8833    0.9138        60
+             Trout     0.8889    0.9333    0.9106        60
+
+          accuracy                         0.9259       540
+         macro avg     0.9268    0.9259    0.9259       540
+      weighted avg     0.9268    0.9259    0.9259       540
