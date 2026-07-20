@@ -209,17 +209,9 @@ Using the best configuration identified through tuning, a final model was traine
 
 ## Training Visualizations
 
-**Baseline Model - Loss and Accuracy**
+The image below shows a side-by-side comparison of the baseline and optimized models' training/validation loss and accuracy curves, along with the confusion matrix for the optimized model on the test set.
 
-![Baseline Training Curves](output/baseline_training_curves.png)
-
-**Optimized Model - Loss and Accuracy**
-
-![Optimized Training Curves](output/optimized_training_curves.png)
-
-**Confusion Matrix - Optimized Model (Test Set)**
-
-![Confusion Matrix](output/confusion_matrix.png)
+![Final Results Grid](output/final_results_grid.png)
 
 ## Test Set Evaluation
 
