@@ -2,21 +2,18 @@ import os
 import shutil
 import random
 
-# Where the downloaded dataset lives
-source_base = r"C:\Users\sijip\.cache\kagglehub\datasets\crowww\a-large-scale-fish-dataset\versions\2\Fish_Dataset\Fish_Dataset"
+# Where the correct fish dataset lives locally
+source_base = r"C:\Users\sijip\Downloads\Fish\Fish"
 
-# Where we'll copy our smaller, organized subset
+# Where we'll copy our organized subset
 dest_base = "fish_data"
-
-# How many images to use per species
-images_per_species = 400
 
 # Split ratios
 train_ratio = 0.70
 val_ratio = 0.15
 test_ratio = 0.15
 
-# Get list of species folder names (skip files like license.txt)
+# Get list of species folder names
 species_list = [
     name for name in os.listdir(source_base)
     if os.path.isdir(os.path.join(source_base, name))
@@ -28,21 +25,17 @@ print("Found species:", species_list)
 random.seed(42)
 
 for species in species_list:
-    # The actual images are inside a nested folder with the same name
-    images_folder = os.path.join(source_base, species, species)
-
-    if not os.path.isdir(images_folder):
-        print("Skipping (no image folder found):", species)
-        continue
+    images_folder = os.path.join(source_base, species)
 
     all_images = [
         f for f in os.listdir(images_folder)
-        if f.lower().endswith(".png")
+        if f.lower().endswith((".jpg", ".jpeg", ".png"))
     ]
 
     random.shuffle(all_images)
 
-    selected_images = all_images[:images_per_species]
+    # Use all available images (dataset is small, no cap needed)
+    selected_images = all_images
 
     # Calculate split sizes
     n_total = len(selected_images)

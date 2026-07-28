@@ -105,3 +105,15 @@
 **Response Synopsis:** Guidance on generating evaluation metrics and visualizations.
 
 **Changes Made:** Created evaluate_models.py and updated README.md.
+
+## Entry 10
+
+**Date and Time:** July 27, 2026, 6:00 PM
+
+**AI Tool:** Claude
+
+**Prompt:** Help correcting the fish dataset used for Homework 3 and re-running the full training pipeline.
+
+**Response Synopsis:** Guidance on updating the data source, re-running preprocessing, training, hyperparameter tuning, and evaluation on the corrected dataset.
+
+**Changes Made:** Updated preprocessing.py, recreated hyperparameter_tuning.py, re-ran train_baseline.py, hyperparameter_tuning.py, train_optimized.py, evaluate_models.py, and make_final_grid.py. Updated README.md with corrected results.

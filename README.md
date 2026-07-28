@@ -174,18 +174,17 @@ SijiGokuldas_CS898BA_Project1/
 
 ## Dataset
 
-The "A Large Scale Fish Dataset" from Kaggle was used, containing 9 fish species. A subset of 400 images per species (3,600 total) was selected and split into training (70%), validation (15%), and test (15%) sets using a fixed random seed for reproducibility.
+A locally provided fish dataset containing 6 species (Discus, Goldfish, Guppy, Oscar, Betta, Crayfish) was used, totaling 1,016 images. Class sizes varied naturally (80–207 images per species). The dataset was split into training (70%), validation (15%), and test (15%) sets using a fixed random seed for reproducibility, resulting in 708 training, 151 validation, and 157 test images.
 
 ## Data Preprocessing and Augmentation
 
 All images were resized to 128x128 pixels and normalized to a [-1, 1] pixel range. Data augmentation (random horizontal flips, random rotation up to 10 degrees, and brightness jitter) was applied only to the training set to improve generalization and reduce overfitting. No augmentation was applied to validation/test data, since those sets are meant to reflect real, unmodified performance.
-This augmentation had a visible effect on training stability: in both the baseline and optimized training curves, validation accuracy remained consistently higher than training accuracy throughout training, and validation loss stayed below training loss. This is a strong indicator that the model was not overfitting — augmentation made the training data intentionally harder and more varied, which meant the model had to learn genuinely transferable features rather than memorizing exact images, resulting in better performance on unseen validation data.
 
 ## Baseline CNN
 
 A CNN with 3 convolutional layers (32, 64, 128 filters), ReLU activation, and max-pooling was built from scratch, followed by a dense layer with dropout (0.3) and a final classification layer. Trained for 5 epochs with Adam optimizer, learning rate 0.001, and batch size 32.
 
-**Baseline Results:** 91.85% validation accuracy, 0.2447 validation loss.
+**Baseline Results:** 86.11% validation accuracy, 0.3714 validation loss (final epoch).
 
 ## Hyperparameter Tuning
 
@@ -193,20 +192,20 @@ A Grid Search strategy was used, systematically testing six configurations by va
 
 | Learning Rate | Batch Size | Dropout | Val Loss | Val Accuracy |
 |---|---|---|---|---|
-| 0.01 | 32 | 0.3 | 2.1974 | 11.11% |
-| 0.001 | 32 | 0.3 | 0.6246 | 75.93% |
-| 0.0001 | 32 | 0.3 | 1.0703 | 62.59% |
-| 0.001 | 64 | 0.3 | 0.6554 | 76.67% |
-| 0.001 | 32 | 0.5 | 1.0604 | 56.11% |
-| 0.001 | 64 | 0.5 | 0.7014 | 73.15% |
+| 0.01 | 32 | 0.3 | 1.2695 | 52.32% |
+| 0.001 | 32 | 0.3 | 0.9266 | 65.56% |
+| 0.0001 | 32 | 0.3 | 1.1630 | 58.94% |
+| 0.001 | 64 | 0.3 | 1.0109 | 62.25% |
+| 0.001 | 32 | 0.5 | 1.0061 | 62.91% |
+| 0.001 | 64 | 0.5 | 1.1389 | 57.62% |
 
-**Findings:** A learning rate of 0.01 was far too high, causing the model to fail to learn meaningfully (11% accuracy, near random guessing for 9 classes). Learning rate 0.001 consistently performed best across all trials. Increasing dropout to 0.5 hurt performance in every case, suggesting it was too aggressive for a relatively small dataset, restricting the model's ability to learn useful patterns. Batch size had a smaller effect, with 32 and 64 performing similarly. The best configuration (learning rate 0.001, batch size 32, dropout 0.3) matched the original baseline settings, confirming the baseline was already well-tuned.
+**Findings:** A learning rate of 0.01 was too high, resulting in unstable training and the worst validation loss. Learning rate 0.001 consistently performed best across all trials, with performance degrading at both the higher (0.01) and lower (0.0001) extremes. Increasing dropout to 0.5 did not improve results, and batch size 32 slightly outperformed 64. The best configuration (learning rate 0.001, batch size 32, dropout 0.3) matched the original baseline settings, confirming the baseline was already well-tuned for this small dataset.
 
 ## Optimized Model
 
 Using the best configuration identified through tuning, a final model was trained for 10 epochs (double the baseline) to allow more complete learning.
 
-**Optimized Results:** 92.96% validation accuracy, 0.1697 validation loss — an improvement over the baseline in both accuracy and confidence of predictions.
+**Optimized Results:** 76.16% validation accuracy (final epoch), peaking at 78.81% at epoch 9, with validation loss of 0.6848.
 
 ## Training Visualizations
 
@@ -216,12 +215,12 @@ The image below shows a side-by-side comparison of the baseline and optimized mo
 
 ## Test Set Evaluation
 
-Both models were evaluated on the held-out test set (540 images, unseen during training or validation). The baseline model achieved 89.44% test accuracy, while the optimized model achieved 92.59% test accuracy — confirming the improvement from tuning and longer training held up on genuinely unseen data, not just validation data. The optimized model's per-class F1-scores ranged from 0.876 (Sea Bass) to 0.968 (Red Mullet). Full precision, recall, and F1-score tables for both models are available in `output/classification_reports.txt`.
+Both models were evaluated on the held-out test set (157 images, unseen during training or validation). The baseline model achieved 75.80% test accuracy, while the optimized model achieved 78.98% test accuracy — confirming the improvement from tuning and longer training held up on genuinely unseen data. The optimized model showed particularly strong gains in recall for Discus (96.77%) and Gold (93.75%), while Crayfish (the smallest class, only 80 images total) remained the hardest to classify for both models due to limited training examples. Full precision, recall, and F1-score tables for both models are available in `output/classification_reports.txt`.
 
 ## Confusion Matrix Analysis
 
-The confusion matrix for the optimized model (`output/confusion_matrix.png`) shows a strong diagonal, indicating accurate classification across all 9 species. Red Mullet was classified perfectly (60/60). The most common confusion was Trout being misclassified as Red Sea Bream (4 instances), which may be due to visual similarity in color and body shape between the two species. Sea Bass had the most distributed misclassifications across several other classes, consistent with its lower F1-score in the classification report.
+The confusion matrix for the optimized model (`output/confusion_matrix.png`) shows strong diagonal performance on the better-represented classes (Discus, Gold, Guppy), while Crayfish and Oscar—the two smallest classes—showed more misclassification, consistent with their lower support in the test set (12 and 23 images respectively) and their comparatively lower F1-scores.
 
 ## Conclusion
 
-This assignment involved building a CNN from scratch to classify 9 fish species, then systematically tuning hyperparameters to identify the optimal configuration. Learning rate had the largest impact on performance, with 0.001 proving optimal, while higher dropout rates reduced accuracy on this dataset size. The final optimized model achieved 92.96% validation accuracy and 92.68% test accuracy, representing a meaningful improvement over the baseline while confirming that the original architecture and most baseline hyperparameters were already well-suited to this task.
+This assignment involved building a CNN from scratch to classify 6 fish/aquatic species from a small, naturally imbalanced local dataset, then systematically tuning hyperparameters to identify the optimal configuration. Learning rate had the largest impact on performance, with 0.001 proving optimal, while learning rate 0.01 caused unstable training. The final optimized model achieved 78.98% test accuracy, a meaningful improvement over the 75.80% baseline, though overall performance was naturally lower than a similarly-scoped task on a larger, more balanced dataset would produce, given the dataset's small size (1,016 images total) and class imbalance.

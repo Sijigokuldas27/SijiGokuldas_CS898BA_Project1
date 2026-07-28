@@ -6,8 +6,8 @@
         "batch_size": 32,
         "dropout_rate": 0.3
       },
-      "val_loss": 2.1973724259270564,
-      "val_accuracy": 0.1111111111111111
+      "val_loss": 1.2695016821488638,
+      "val_accuracy": 0.5231788079470199
     },
     {
       "config": {
@@ -15,8 +15,8 @@
         "batch_size": 32,
         "dropout_rate": 0.3
       },
-      "val_loss": 0.6245502977735466,
-      "val_accuracy": 0.7592592592592593
+      "val_loss": 0.9266145347759424,
+      "val_accuracy": 0.6556291390728477
     },
     {
       "config": {
@@ -24,8 +24,8 @@
         "batch_size": 32,
         "dropout_rate": 0.3
       },
-      "val_loss": 1.0703208636354518,
-      "val_accuracy": 0.6259259259259259
+      "val_loss": 1.1630422547953019,
+      "val_accuracy": 0.5894039735099338
     },
     {
       "config": {
@@ -33,8 +33,8 @@
         "batch_size": 64,
         "dropout_rate": 0.3
       },
-      "val_loss": 0.6554164305881217,
-      "val_accuracy": 0.7666666666666667
+      "val_loss": 1.0108890722918984,
+      "val_accuracy": 0.6225165562913907
     },
     {
       "config": {
@@ -42,8 +42,8 @@
         "batch_size": 32,
         "dropout_rate": 0.5
       },
-      "val_loss": 1.0603681873392177,
-      "val_accuracy": 0.5611111111111111
+      "val_loss": 1.0060687949325864,
+      "val_accuracy": 0.6291390728476821
     },
     {
       "config": {
@@ -51,8 +51,8 @@
         "batch_size": 64,
         "dropout_rate": 0.5
       },
-      "val_loss": 0.7013615406221814,
-      "val_accuracy": 0.7314814814814815
+      "val_loss": 1.138929183909435,
+      "val_accuracy": 0.5761589403973509
     }
   ],
   "best_result": {
@@ -61,7 +61,7 @@
       "batch_size": 32,
       "dropout_rate": 0.3
     },
-    "val_loss": 0.6245502977735466,
-    "val_accuracy": 0.7592592592592593
+    "val_loss": 0.9266145347759424,
+    "val_accuracy": 0.6556291390728477
   }
 }
