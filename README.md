@@ -180,6 +180,12 @@ A locally provided fish dataset containing 6 species (Discus, Goldfish, Guppy, O
 
 All images were resized to 128x128 pixels and normalized to a [-1, 1] pixel range. Data augmentation (random horizontal flips, random rotation up to 10 degrees, and brightness jitter) was applied only to the training set to improve generalization and reduce overfitting. No augmentation was applied to validation/test data, since those sets are meant to reflect real, unmodified performance.
 
+## Impact of Augmentation on Training Stability
+
+Data augmentation had a clear effect on training stability, but its impact differed between the baseline and optimized models due to training duration. In the baseline model (5 epochs), validation accuracy stayed above training accuracy throughout training (86.11% val vs. 84.26% train by the final epoch), and validation loss remained lower than training loss. This indicates augmentation was working as intended — by making the training data intentionally harder and more varied, the model was pushed to learn transferable features rather than memorize specific images, so it performed at least as well on unseen validation data.
+
+In the optimized model (10 epochs), this pattern shifted partway through training. By the final epoch, training accuracy (86.02%) exceeded validation accuracy (76.16%), and training loss (0.3839) dropped well below validation loss (0.6848). This divergence suggests that with the longer training duration, the model began mildly overfitting despite augmentation, which is a reasonable outcome given the dataset's small size (only 1,016 images across 6 classes, with the smallest class — Crayfish — containing just 80 images). Augmentation reduced but did not fully prevent overfitting on a dataset this limited; a dataset of this size has less room to absorb 10 full epochs before the model starts fitting training-specific noise.
+
 ## Baseline CNN
 
 A CNN with 3 convolutional layers (32, 64, 128 filters), ReLU activation, and max-pooling was built from scratch, followed by a dense layer with dropout (0.3) and a final classification layer. Trained for 5 epochs with Adam optimizer, learning rate 0.001, and batch size 32.
